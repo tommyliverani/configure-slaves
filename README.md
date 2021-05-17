@@ -22,7 +22,7 @@ After that process you will be able to use the configured nodes as simple jenkin
 
 * **_bash commands.sh ca_**: generate ca credentials
 * **_bash commands.sh client_**: generate a client signed certificate
-* **_bash commands.sh server_**: generate a server signed certificate in each slaves and configure the docker daemon
+* **_bash commands.sh slaves_**: generate a server signed certificate in each slaves and configure the docker daemon
 * **_bash commands.sh delete_**: delete all generated files
 
 
