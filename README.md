@@ -18,10 +18,10 @@ After that process you will be able to use the configured nodes as simple jenkin
 * Have ansible installed in the jenkins master
 * Configure each slaves in /etc/ansible/hosts adding:
 
-[slaves]
-<user>@<ip> ansible_user=<user> ansible_ssh_pass=<pass>
-  .
-  .
+* [slaves]
+* <user>@<ip> ansible_user=<user> ansible_ssh_pass=<pass>
+*  .
+*  .
 
 ## commands
 
