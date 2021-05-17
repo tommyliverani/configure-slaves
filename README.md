@@ -1,3 +1,24 @@
 # configure-slaves
 
-NB:  Make sure that “Common Name” matches the hostname you use to connect to Docker:
+Simple script that configure remote nodes in order to act as jenkins slaves and it is made to run in the jenkins master.
+The script use **_ansible playbook_** and implements the following features:
+
+* ensure java is installed in each slaves
+* esnude docker is installed in each slaves
+* generate ca credentials
+* generate a client signed certificate
+* generate server signed certificates in each slaves
+* configure the docker daemon in each slaves to act as docker host with the generated certificate
+
+After that process you will be able to use the configured nodes as simple jenkins slaves or as docker clouds.
+
+
+## commands
+
+* **_bash commands.sh ca_**: generate ca credentials
+* **_bash commands.sh client_**: generate a client signed certificate
+* **_bash commands.sh server_**: generate a server signed certificate in each slaves and configure the docker daemon
+* **_bash commands.sh delete_**: delete all generated files
+
+
+
