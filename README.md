@@ -13,6 +13,16 @@ The script use **_ansible playbook_** and implements the following features:
 After that process you will be able to use the configured nodes as simple jenkins slaves or as docker clouds.
 
 
+## Requirements
+* Have openssl installed
+* Have ansible installed in the jenkins master
+* Configure each slaves in /etc/ansible/hosts adding:
+
+[slaves]
+<user>@<ip> ansible_user=<user> ansible_ssh_pass=<pass>
+  .
+  .
+
 ## commands
 
 * **_bash commands.sh ca_**: generate ca credentials
