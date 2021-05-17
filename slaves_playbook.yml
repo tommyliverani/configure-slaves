@@ -13,36 +13,31 @@
           state: latest         
       - name: copying ca directory
         copy:
-         src: /home/tommy/Desktop/ca
-         dest: /home/tommy/Desktop/
-      - name: creating server directory
-        file:
-          path: /home/tommy/Desktop/server
-          state: directory
-      - name: creating server private key
-        command: openssl genrsa -out /home/tommy/Desktop/server/server-key.pem 4096
-      - name: creating server.cert
-        command: openssl req -subj "/CN=192.168.56.105" -sha256 -new -key /home/tommy/Desktop/server/server-key.pem -out /home/tommy/Desktop/server/server.csr
-      - name: create the configuration file
+         src: ./ca
+         dest: /
+      - name: copying server directory
         copy:
-          src: /home/tommy/Desktop/ca/extfile.cnf
-          dest: '/home/tommy/Desktop/server/extfile.cnf'
-      - name: create the signed certificate
-        command: openssl x509 -req -days 365 -sha256 -in /home/tommy/Desktop/server/server.csr -CA /home/tommy/Desktop/ca/ca.pem -CAkey /home/tommy/Desktop/ca/ca-key.pem -CAcreateserial -out /home/tommy/Desktop/server/server-cert.pem -extfile /home/tommy/Desktop/server/extfile.cnf -passin pass:tommy
-      - name: ensure docker service is running
-        service:
-          name: docker
-          state: restarted
-      - name: delete CA private key
-        file: 
-          path: /home/tommy/Desktop/ca.key
-          state: absent
+         src: ./server
+         dest: /
+      - name: copying commands file
+        copy:
+         src: ./commands.sh
+         dest: /
+      - name: creating server keys and certificate
+        command: /bin/bash /commands.sh server
       - name: configure the docker service
         lineinfile:
           path: /usr/lib/systemd/system/docker.service
           regexp: 'ExecStart'
           line: 'ExecStart=/usr/bin/dockerd -H tcp://192.168.56.105:4243 -H unix:///var/run/docker.sock --tlsverify --tlscacert=/home/tommy/Desktop/ca/ca.pem --tlscert=/home/tommy/Desktop/server/server-cert.pem --tlskey=/home/tommy/Desktop/server/server-key.pem'
           state: present
+      - name: restart docker service
+        service:
+          name: docker
+          state: restarted
+      - name: delete useless files
+        command: /bin/bash /commands.sh clean
+
       
          
         

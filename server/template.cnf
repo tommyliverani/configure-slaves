@@ -1,0 +1,2 @@
+subjectAltName = DNS:192.168.56.103,IP:<HOST_IP>
+extendedKeyUsage = serverAuth
