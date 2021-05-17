@@ -16,12 +16,7 @@ After that process you will be able to use the configured nodes as simple jenkin
 ## Requirements
 * Have openssl installed
 * Have ansible installed in the jenkins master
-* Configure each slaves in /etc/ansible/hosts adding:
-
-* [slaves]
-* <user>@<ip> ansible_user=<user> ansible_ssh_pass=<pass>
-*  .
-*  .
+* Configure each slaves in /etc/ansible/hosts.
 
 ## commands
 
